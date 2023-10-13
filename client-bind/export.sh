@@ -1,20 +1,4 @@
 #!/bin/bash
-# mdbarr=()
-# lenarr=${#mdbarr[@]}
-mdbtestvar="test-ok"
-
-# for f in /client-bind/*; do
-#      mdbarr+=("$f")
-# echo "$lenarr"
-# for ((j=0; j<lenarr; j++));
-# do
-#      printf "hmm index: %d and val: %s\n" $j "${mdbarr[$j]}"
-# # for el in "${mdbarr[@]}";do
-# #      echo "$el"
-# done
-
-echo "$mdbarr"
-
 
 
 tablearray=('tblPlots' 
@@ -101,7 +85,7 @@ contains_true (){
 # puta
 for mdbfile in client-bind/mdbs/* 
 do
-declare "mdb_tables=$( mdb-tables $mdbfile )" #wrong number of arguments but works?
+declare "mdb_tables=$( mdb-tables "$mdbfile" )" #wrong number of arguments but works?
 # trimming file extension from filename
 declare "no_extension=${mdbfile%.*}"
 # trimming whitespace from filename
