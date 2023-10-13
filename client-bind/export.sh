@@ -82,24 +82,12 @@ tablearray=('tblPlots'
 contains_true (){
      local array=$1[@]
      local seeking=$2
-     local mdbfile=$3
-     local dirname=$4
      local in=1
      for element in "${!array}"; 
      do
-     echo "using table array of: ${array}"
-     echo "using mdbfile: ${mdbfile}"
-     echo "using table: ${seeking}"
-     echo "exporting to directory: /client-bind/${dirname}/"
           if [[ $element == "$seeking" ]]; 
           then 
-               echo "table ${seeking} found in approved-tables array"
-               mdb-export -D '%Y-%m-%d %H:%M:%S' "$mdbfile" "$seeking" > \
-          "client-bind/${dirname}/${dirname}-${seeking}.csv"
                in=0
-               break
-          else 
-               echo "table ${seeking} not found in approved-tables array"
                break
           fi
      done 
@@ -110,22 +98,26 @@ contains_true (){
 ## for each table inside each file:
 ### mdb-csv to xdirectory/file-table 
 
+# puta
 for mdbfile in client-bind/mdbs/* 
 do
-# triming file extension from filename
+declare "mdb_tables=$( mdb-tables $mdbfile )" #wrong number of arguments but works?
+# trimming file extension from filename
 declare "no_extension=${mdbfile%.*}"
-# triming whitespace from filename
+# trimming whitespace from filename
 declare "no_whitespace=$(echo "$no_extension" | tr -d ' ')"
 # trimming path from filename
 declare "no_path=${no_whitespace##*/}"
 echo "Currently working on mdb: ${no_path}"
 # if dir does not exist, create it
-[ -d /client-bind/${no_path}] || mkdir /client-bind/${no_path}
-     for table in $(mdb-tables $mdbfile)
+[ -d "/client-bind/${no_path}" ] || mkdir "/client-bind/${no_path}"
+     echo "File is: ${mdbfile}"
+     for table in $mdb_tables
      do
-     echo "Currently exporting table: ${table} from mdb: ${no_path}"
+          echo "Working on table: $table from mdb: $mdbfile"
           # para cada mdb, si la tabla existe en el array principal,
           # extraer a csv
-          contains_true tablearray "$table" "$mdbfile" "$no_path"
+          contains_true tablearray "$table" && mdb-export -D '%Y-%m-%d %H:%M:%S' "$mdbfile" "$table" > \
+          "client-bind/${no_path}/${no_path}-${table}.csv" || echo "$table NOT EXPORTED"
      done
 done
