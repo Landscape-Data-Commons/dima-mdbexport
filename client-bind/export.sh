@@ -82,7 +82,7 @@ contains_true (){
 ## for each table inside each file:
 ### mdb-csv to xdirectory/file-table 
 
-# puta
+# input files in mdbs directory
 for mdbfile in client-bind/mdbs/* 
 do
 declare "mdb_tables=$( mdb-tables "$mdbfile" )" #wrong number of arguments but works?
