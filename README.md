@@ -12,6 +12,6 @@ Leverages mdbtools and bash to batch-export selected tables from mdb files to CS
 The script will deposit the csv files of each table inside a directory with the name of the mdb file.
 
 ## todo 
-[x] create custom docker image with the: mdbtools, python and pgclient (to soon include the rest of the ingest script)
-[ ] create entrypoint script for the container that switches between extract and ingest (else use lighter image, not postgis)
-[ ] create transform script with straightforward transform functions(airflow ready)
+- [x] create custom docker image with the: mdbtools, python and pgclient (to soon include the rest of the ingest script)
+- [ ] create entrypoint script for the container that switches between extract and ingest (else use lighter image, not postgis)
+- [ ] create transform script with straightforward transform functions(airflow ready)
