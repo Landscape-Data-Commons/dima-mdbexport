@@ -1,5 +1,9 @@
 ## script to extract tables from MSAccess databases
 
+### Requirements
+
+- Local installation of Docker (docker desktop 4.24+ if on Windows)
+
 ### description
 Leverages mdbtools and bash to batch-export selected tables from mdb files to CSV.
 
