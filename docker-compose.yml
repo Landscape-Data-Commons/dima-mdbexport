@@ -20,6 +20,6 @@ services:
 #   pg-network:
 #     external: true
 
-volumes:
-  mdb_test_pg_data:
-    external: true
+# volumes:
+#   mdb_test_pg_data:
+#     external: true
