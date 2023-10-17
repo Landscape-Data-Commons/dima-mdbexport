@@ -99,8 +99,7 @@ echo "Currently working on mdb: ${no_path}"
      for table in $mdb_tables
      do
           echo "Working on table: $table from mdb: $mdbfile"
-          # para cada mdb, si la tabla existe en el array principal,
-          # extraer a csv
+          # for each mdb, if the table exists on the main array = extract to csv
           contains_true tablearray "$table" && mdb-export -D '%Y-%m-%d %H:%M:%S' "$mdbfile" "$table" > \
           "client-bind/${no_path}/${no_path}-${table}.csv" || echo "$table NOT EXPORTED"
      done
