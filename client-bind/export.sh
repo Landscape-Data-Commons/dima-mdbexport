@@ -85,11 +85,14 @@ contains_true (){
 # input files in mdbs directory
 for mdbfile in client-bind/mdbs/* 
 do
-declare "mdb_tables=$( mdb-tables "$mdbfile" )" #wrong number of arguments but works?
+declare "mdb_tables=$( mdb-tables "$mdbfile" )" 
+
 # trimming file extension from filename
 declare "no_extension=${mdbfile%.*}"
+
 # trimming whitespace from filename
 declare "no_whitespace=$(echo "$no_extension" | tr -d ' ')"
+
 # trimming path from filename
 declare "no_path=${no_whitespace##*/}"
 echo "Currently working on mdb: ${no_path}"
